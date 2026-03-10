@@ -5,3 +5,7 @@ error ZeroAddressError();
 error NotEnoughContractToken();
 error ZeroAmountError();
 error VestingAlreadyAllocated();
+
+error InvalidTimeUnit();
+error CliffMustExceedDuration();
+error DurationMustBeGreaterThanZero();

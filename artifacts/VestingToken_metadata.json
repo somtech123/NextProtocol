@@ -33,26 +33,18 @@
 			},
 			{
 				"inputs": [],
-				"name": "NotEnoughContractToken",
+				"name": "CliffMustExceedDuration",
 				"type": "error"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "recipient",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					}
-				],
-				"name": "addBeneficiary",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
+				"inputs": [],
+				"name": "DurationMustBeGreaterThanZero",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "InvalidTimeUnit",
+				"type": "error"
 			},
 			{
 				"inputs": [
@@ -71,13 +63,6 @@
 					}
 				],
 				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "claim",
-				"outputs": [],
-				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -101,74 +86,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "cliff",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "user",
-						"type": "address"
-					}
-				],
-				"name": "diagnose",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "currentTime",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "cliffEndsAt",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "cliffRemaining",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "userAllocation",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "vestedNow",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "alreadyClaimed",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "claimableNow",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "balance",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "duration",
+				"name": "i_cliff",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -181,7 +99,20 @@
 			},
 			{
 				"inputs": [],
-				"name": "owner",
+				"name": "i_duration",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "i_owner",
 				"outputs": [
 					{
 						"internalType": "address",
@@ -194,7 +125,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "startTime",
+				"name": "i_startTime",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -207,7 +138,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "token",
+				"name": "i_token",
 				"outputs": [
 					{
 						"internalType": "contract IERC20",
@@ -268,19 +199,19 @@
 			]
 		},
 		"contracts/errors.sol": {
-			"keccak256": "0xe117e1ea0ea7d6eae7df6cb31c96953c58cd55495fef77c66a3a71e5445e3106",
+			"keccak256": "0xc585b28b820d11e292d81aa0a3742e4e3aabde208b31db9d0c72021f19b632b1",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2c923480b614ffe5a12424a4ed19932f8e70e0be2237832a90face064fd6a3af",
-				"dweb:/ipfs/QmVUi8eE85JLRCTRAzUySjsjFo8Gm7pumJ5PtFJWZRVxd8"
+				"bzz-raw://f178f3a1f4f12781bde23c38acb6dcebc1764b2615c10d94588a693999427766",
+				"dweb:/ipfs/QmPdJCcEBTU4hFzRbNW4fJJjkkN5rcEi9otPY56tg99zUE"
 			]
 		},
 		"contracts/vesting.sol": {
-			"keccak256": "0x82257aa53c65ac8b9cab22a63ae1eda7f03d238a5702bf36e3f835f9d8496980",
+			"keccak256": "0x1f8ab62d9383c74b0e911e85bbcd1617d7de31d90afe50d9862ee43f1a0f9d57",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d11131ab4b10c80f2153391799a33b99cfcbb902e5259513016f9a4060f13ce5",
-				"dweb:/ipfs/QmYE1gYf2jU6GfapsHNrSBoAXaTXZm4yAU6h6CgYN8itSJ"
+				"bzz-raw://18f9fdcf37261eed57ba79fd9cf97d03bf3abdcefbed88504042633fbe9b641c",
+				"dweb:/ipfs/QmTKJ9DqCbDybyJpp4nQFUnszpiFBnLGMyxjFrEiJLgsmF"
 			]
 		}
 	},

@@ -75,7 +75,7 @@ contract NexToken is ERC20, AccessControl, ERC20Pausable{
     }
 
     function getVestingAmount() public view returns(uint256){
-        return (totalSupply() * 10 )/ 100;
+        return (totalSupply() * 20 )/ 100;
     }
 
     function allocateVesting(address to) public onlyRole(DISTRIBUTOR_ROLE) {
