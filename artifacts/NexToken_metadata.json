@@ -134,6 +134,11 @@
 			},
 			{
 				"inputs": [],
+				"name": "VestingAlreadyAllocated",
+				"type": "error"
+			},
+			{
+				"inputs": [],
 				"name": "ZeroAddressError",
 				"type": "error"
 			},
@@ -310,7 +315,7 @@
 				"inputs": [
 					{
 						"internalType": "address[]",
-						"name": "recipents",
+						"name": "recipients",
 						"type": "address[]"
 					},
 					{
@@ -320,6 +325,19 @@
 					}
 				],
 				"name": "airdrop",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					}
+				],
+				"name": "allocateVesting",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -381,6 +399,19 @@
 					}
 				],
 				"name": "balanceOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "contractBalance",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -455,6 +486,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "getVestingAmount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "bytes32",
@@ -491,6 +535,32 @@
 						"internalType": "bool",
 						"name": "",
 						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "isVestingAllocated",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "maxSupply",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -660,24 +730,6 @@
 						"type": "bool"
 					}
 				],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "to",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "value",
-						"type": "uint256"
-					}
-				],
-				"name": "transferToVesting",
-				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -951,19 +1003,19 @@
 			]
 		},
 		"contracts/errors.sol": {
-			"keccak256": "0x95275a927e37e47732333afcf170dd6a0547ceaf7cee40ef1db10857d4e2ff34",
+			"keccak256": "0xe117e1ea0ea7d6eae7df6cb31c96953c58cd55495fef77c66a3a71e5445e3106",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://ce69ee5e1989298eb6b6771c0658fa476bd234ddc0a139fa712afd9bc54e65d2",
-				"dweb:/ipfs/QmY9ZVoKh5QMYq3YjbVWg58rFgw6YU8SLBzEbjiUb2RgsG"
+				"bzz-raw://2c923480b614ffe5a12424a4ed19932f8e70e0be2237832a90face064fd6a3af",
+				"dweb:/ipfs/QmVUi8eE85JLRCTRAzUySjsjFo8Gm7pumJ5PtFJWZRVxd8"
 			]
 		},
 		"contracts/token.sol": {
-			"keccak256": "0x79c5def523933f2aed919401744f7dbb4540f6bb19036f621b9db7164b8b1b15",
+			"keccak256": "0xa988c833ef65b428e6e770b5f00a3bd95b2e8f26efc4b793643d3a37160e7a91",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://fa44430854e1f25ab4d0517e0134738522e00a9b8dc6364f6ef17f9c91f92984",
-				"dweb:/ipfs/Qma66rHHTxEFZo7Q2gwzkLQNZXkT7JgePmTdK2efGnnmV4"
+				"bzz-raw://ec2c8fb2412d8e3614c58ce9fe89471fa31dbd6ea9665f92c59e047345604cfa",
+				"dweb:/ipfs/QmPnZL4a8cv3P5rKDdZZBaHTbtmTRNGSQepxexvLQQ1Zkp"
 			]
 		}
 	},
