@@ -17,3 +17,5 @@ error InvalidRole();
 error BeneficiaryNotFound();
 error NoTokensToClaim();
 error NotABeneficiary();
+
+error NoMilestonesProvided();

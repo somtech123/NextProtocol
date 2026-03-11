@@ -1,5 +1,5 @@
 {
-	"id": "075acc633ed739be9f97ff7a162045d1",
+	"id": "ee1f7980d25dee9966a574b813abc57c",
 	"_format": "hh-sol-build-info-1",
 	"solcVersion": "0.8.30",
 	"solcLongVersion": "0.8.30+commit.73712a01",
@@ -7,7 +7,7 @@
 		"language": "Solidity",
 		"sources": {
 			"contracts/errors.sol": {
-				"content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.18;\r\n\r\nerror ZeroAddressError();\r\nerror NotEnoughContractToken();\r\nerror ZeroAmountError();\r\nerror VestingAlreadyAllocated();\r\n\r\nerror InvalidTimeUnit();\r\nerror CliffMustExceedDuration();\r\nerror DurationMustBeGreaterThanZero();\r\n\r\nerror ShareMustExceedZero();\r\nerror BeneficiaryAlreadyExist();\r\nerror TotalShareExceeded();\r\nerror InvalidRole();\r\nerror BeneficiaryNotFound();\r\nerror NoTokensToClaim();\r\nerror NotABeneficiary();\r\n"
+				"content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.18;\r\n\r\nerror ZeroAddressError();\r\nerror NotEnoughContractToken();\r\nerror ZeroAmountError();\r\nerror VestingAlreadyAllocated();\r\n\r\nerror InvalidTimeUnit();\r\nerror CliffMustExceedDuration();\r\nerror DurationMustBeGreaterThanZero();\r\n\r\nerror ShareMustExceedZero();\r\nerror BeneficiaryAlreadyExist();\r\nerror TotalShareExceeded();\r\nerror InvalidRole();\r\nerror BeneficiaryNotFound();\r\nerror NoTokensToClaim();\r\nerror NotABeneficiary();\r\n\r\nerror NoMilestonesProvided();\r\n"
 			}
 		},
 		"settings": {
@@ -62,6 +62,9 @@
 						"InvalidTimeUnit": [
 							11
 						],
+						"NoMilestonesProvided": [
+							31
+						],
 						"NoTokensToClaim": [
 							27
 						],
@@ -87,7 +90,7 @@
 							7
 						]
 					},
-					"id": 30,
+					"id": 32,
 					"license": "MIT",
 					"nodeType": "SourceUnit",
 					"nodes": [
@@ -297,9 +300,23 @@
 								"src": "477:2:0"
 							},
 							"src": "456:24:0"
+						},
+						{
+							"errorSelector": "5dfece3f",
+							"id": 31,
+							"name": "NoMilestonesProvided",
+							"nameLocation": "490:20:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 30,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "510:2:0"
+							},
+							"src": "484:29:0"
 						}
 					],
-					"src": "33:449:0"
+					"src": "33:482:0"
 				},
 				"id": 0
 			}

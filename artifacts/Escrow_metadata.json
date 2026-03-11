@@ -1,0 +1,256 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_token",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "NoMilestonesProvided",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ZeroAddressError",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_freelancer",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "_amount",
+						"type": "uint256[]"
+					}
+				],
+				"name": "createJob",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "freelancerJobs",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_jobid",
+						"type": "uint256"
+					}
+				],
+				"name": "getjob",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "id",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "clients",
+								"type": "address"
+							},
+							{
+								"internalType": "address",
+								"name": "freelancer",
+								"type": "address"
+							},
+							{
+								"components": [
+									{
+										"internalType": "uint256",
+										"name": "amount",
+										"type": "uint256"
+									},
+									{
+										"internalType": "bool",
+										"name": "completed",
+										"type": "bool"
+									},
+									{
+										"internalType": "bool",
+										"name": "paid",
+										"type": "bool"
+									}
+								],
+								"internalType": "struct Escrow.MileStone[]",
+								"name": "milestones",
+								"type": "tuple[]"
+							},
+							{
+								"internalType": "uint256",
+								"name": "totalAmount",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Escrow.Job",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "i_token",
+				"outputs": [
+					{
+						"internalType": "contract IERC20",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "jobId",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "jobs",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "clients",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "freelancer",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "totalAmount",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/escrow.sol": "Escrow"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+			"keccak256": "0x74ed01eb66b923d0d0cfe3be84604ac04b76482a55f9dd655e1ef4d367f95bc2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5282825a626cfe924e504274b864a652b0023591fa66f06a067b25b51ba9b303",
+				"dweb:/ipfs/QmeCfPykghhMc81VJTrHTC7sF6CRvaA1FXVq2pJhwYp1dV"
+			]
+		},
+		"contracts/errors.sol": {
+			"keccak256": "0x6c41b0d9f21df67583e5bfea4bbe3c79a0cfc7bb5d1564aef0af32ac423da881",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://15fd716262a5c0a782a81a7b4ab495d13d437d9dbbc0276a18e557af57bfb991",
+				"dweb:/ipfs/QmQJcFQoLUdHejF28ZxFdv12pTb3QvnHAXDbbXn46NMZzT"
+			]
+		},
+		"contracts/escrow.sol": {
+			"keccak256": "0xc5a28e8dd36ae5a0a503a84eac15a0f8f81878b581f8d658215d3e76efb6a2d2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://9fed3abe226891336df609a8d41a1b08b3c1f7775e23e398b460c4e3a5b9ec2d",
+				"dweb:/ipfs/QmdMeXNo9YGmur2n6fj5q3KjU6EC4PpCNxFwpLPCsr3LQ9"
+			]
+		},
+		"contracts/helper.sol": {
+			"keccak256": "0xa1fb02d0cd615b9c6be2268e132988c635161d6cba732f8fb0cccfb66b44af60",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8b17cab82df911a93d51e9f0a65d6cd8bd1c2a1140ee1b790f9da863a1cf1f16",
+				"dweb:/ipfs/QmZEvzy2pRHS5fE5uQsuCnW7gW1tjcWsYfq7nWBJ9pccDo"
+			]
+		}
+	},
+	"version": 1
+}
