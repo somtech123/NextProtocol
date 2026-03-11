@@ -1,0 +1,308 @@
+{
+	"id": "075acc633ed739be9f97ff7a162045d1",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.30",
+	"solcLongVersion": "0.8.30+commit.73712a01",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"contracts/errors.sol": {
+				"content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.18;\r\n\r\nerror ZeroAddressError();\r\nerror NotEnoughContractToken();\r\nerror ZeroAmountError();\r\nerror VestingAlreadyAllocated();\r\n\r\nerror InvalidTimeUnit();\r\nerror CliffMustExceedDuration();\r\nerror DurationMustBeGreaterThanZero();\r\n\r\nerror ShareMustExceedZero();\r\nerror BeneficiaryAlreadyExist();\r\nerror TotalShareExceeded();\r\nerror InvalidRole();\r\nerror BeneficiaryNotFound();\r\nerror NoTokensToClaim();\r\nerror NotABeneficiary();\r\n"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			},
+			"remappings": []
+		}
+	},
+	"output": {
+		"sources": {
+			"contracts/errors.sol": {
+				"ast": {
+					"absolutePath": "contracts/errors.sol",
+					"exportedSymbols": {
+						"BeneficiaryAlreadyExist": [
+							19
+						],
+						"BeneficiaryNotFound": [
+							25
+						],
+						"CliffMustExceedDuration": [
+							13
+						],
+						"DurationMustBeGreaterThanZero": [
+							15
+						],
+						"InvalidRole": [
+							23
+						],
+						"InvalidTimeUnit": [
+							11
+						],
+						"NoTokensToClaim": [
+							27
+						],
+						"NotABeneficiary": [
+							29
+						],
+						"NotEnoughContractToken": [
+							5
+						],
+						"ShareMustExceedZero": [
+							17
+						],
+						"TotalShareExceeded": [
+							21
+						],
+						"VestingAlreadyAllocated": [
+							9
+						],
+						"ZeroAddressError": [
+							3
+						],
+						"ZeroAmountError": [
+							7
+						]
+					},
+					"id": 30,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"^",
+								"0.8",
+								".18"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "33:24:0"
+						},
+						{
+							"errorSelector": "3efa09af",
+							"id": 3,
+							"name": "ZeroAddressError",
+							"nameLocation": "67:16:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 2,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "83:2:0"
+							},
+							"src": "61:25:0"
+						},
+						{
+							"errorSelector": "e2969e31",
+							"id": 5,
+							"name": "NotEnoughContractToken",
+							"nameLocation": "94:22:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 4,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "116:2:0"
+							},
+							"src": "88:31:0"
+						},
+						{
+							"errorSelector": "6e0ccc07",
+							"id": 7,
+							"name": "ZeroAmountError",
+							"nameLocation": "127:15:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 6,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "142:2:0"
+							},
+							"src": "121:24:0"
+						},
+						{
+							"errorSelector": "9e41143a",
+							"id": 9,
+							"name": "VestingAlreadyAllocated",
+							"nameLocation": "153:23:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 8,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "176:2:0"
+							},
+							"src": "147:32:0"
+						},
+						{
+							"errorSelector": "2b3f1e6e",
+							"id": 11,
+							"name": "InvalidTimeUnit",
+							"nameLocation": "189:15:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 10,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "204:2:0"
+							},
+							"src": "183:24:0"
+						},
+						{
+							"errorSelector": "3be41dfe",
+							"id": 13,
+							"name": "CliffMustExceedDuration",
+							"nameLocation": "215:23:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 12,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "238:2:0"
+							},
+							"src": "209:32:0"
+						},
+						{
+							"errorSelector": "cf478f23",
+							"id": 15,
+							"name": "DurationMustBeGreaterThanZero",
+							"nameLocation": "249:29:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 14,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "278:2:0"
+							},
+							"src": "243:38:0"
+						},
+						{
+							"errorSelector": "9ab10561",
+							"id": 17,
+							"name": "ShareMustExceedZero",
+							"nameLocation": "291:19:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 16,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "310:2:0"
+							},
+							"src": "285:28:0"
+						},
+						{
+							"errorSelector": "35935351",
+							"id": 19,
+							"name": "BeneficiaryAlreadyExist",
+							"nameLocation": "321:23:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 18,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "344:2:0"
+							},
+							"src": "315:32:0"
+						},
+						{
+							"errorSelector": "a98128db",
+							"id": 21,
+							"name": "TotalShareExceeded",
+							"nameLocation": "355:18:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 20,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "373:2:0"
+							},
+							"src": "349:27:0"
+						},
+						{
+							"errorSelector": "d954416a",
+							"id": 23,
+							"name": "InvalidRole",
+							"nameLocation": "384:11:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 22,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "395:2:0"
+							},
+							"src": "378:20:0"
+						},
+						{
+							"errorSelector": "694f351f",
+							"id": 25,
+							"name": "BeneficiaryNotFound",
+							"nameLocation": "406:19:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 24,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "425:2:0"
+							},
+							"src": "400:28:0"
+						},
+						{
+							"errorSelector": "0f3f8610",
+							"id": 27,
+							"name": "NoTokensToClaim",
+							"nameLocation": "436:15:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 26,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "451:2:0"
+							},
+							"src": "430:24:0"
+						},
+						{
+							"errorSelector": "43290f5b",
+							"id": 29,
+							"name": "NotABeneficiary",
+							"nameLocation": "462:15:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 28,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "477:2:0"
+							},
+							"src": "456:24:0"
+						}
+					],
+					"src": "33:449:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}

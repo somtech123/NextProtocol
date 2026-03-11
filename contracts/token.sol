@@ -123,6 +123,7 @@ contract NexToken is ERC20, AccessControl, ERC20Pausable{
      function maxSupply() public view returns (uint256) {
         return i_max_supply;
     }
+    
 
      function isVestingAllocated() public view returns (bool) {
         return vestingAllocated;

@@ -9,3 +9,11 @@ error VestingAlreadyAllocated();
 error InvalidTimeUnit();
 error CliffMustExceedDuration();
 error DurationMustBeGreaterThanZero();
+
+error ShareMustExceedZero();
+error BeneficiaryAlreadyExist();
+error TotalShareExceeded();
+error InvalidRole();
+error BeneficiaryNotFound();
+error NoTokensToClaim();
+error NotABeneficiary();

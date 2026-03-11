@@ -33,6 +33,16 @@
 			},
 			{
 				"inputs": [],
+				"name": "BeneficiaryAlreadyExist",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "BeneficiaryNotFound",
+				"type": "error"
+			},
+			{
+				"inputs": [],
 				"name": "CliffMustExceedDuration",
 				"type": "error"
 			},
@@ -43,23 +53,71 @@
 			},
 			{
 				"inputs": [],
+				"name": "InvalidRole",
+				"type": "error"
+			},
+			{
+				"inputs": [],
 				"name": "InvalidTimeUnit",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "NoTokensToClaim",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ShareMustExceedZero",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "TotalShareExceeded",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ZeroAddressError",
 				"type": "error"
 			},
 			{
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "",
+						"name": "_addr",
 						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_percentShare",
+						"type": "uint256"
+					},
+					{
+						"internalType": "enum VestingToken.Role",
+						"name": "_role",
+						"type": "uint8"
 					}
 				],
-				"name": "allocation",
-				"outputs": [
+				"name": "addBeneficiary",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
 					{
 						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
+					}
+				],
+				"name": "allBeneficiaries",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
 					}
 				],
 				"stateMutability": "view",
@@ -73,7 +131,95 @@
 						"type": "address"
 					}
 				],
-				"name": "claimed",
+				"name": "beneficiaries",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "percentShare",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "allocation",
+						"type": "uint256"
+					},
+					{
+						"internalType": "enum VestingToken.Role",
+						"name": "role",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint256",
+						"name": "claimed",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "exists",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "claim",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addr",
+						"type": "address"
+					}
+				],
+				"name": "getBeneficiary",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "enum VestingToken.Role",
+						"name": "",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addr",
+						"type": "address"
+					}
+				],
+				"name": "getBeneficiaryTotalAllocation",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getTotalVestedPercent",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -151,7 +297,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "totalAllocation",
+				"name": "percentShareAssign",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -199,19 +345,19 @@
 			]
 		},
 		"contracts/errors.sol": {
-			"keccak256": "0xc585b28b820d11e292d81aa0a3742e4e3aabde208b31db9d0c72021f19b632b1",
+			"keccak256": "0xcbe1741b3d834beaf2b7d8b07c70403664e56254bac811d3d46592918956ff53",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f178f3a1f4f12781bde23c38acb6dcebc1764b2615c10d94588a693999427766",
-				"dweb:/ipfs/QmPdJCcEBTU4hFzRbNW4fJJjkkN5rcEi9otPY56tg99zUE"
+				"bzz-raw://7ba390af5e4879f2bcbf7ee0afc042b3613edbf8ebc340a25a8b5966c195a81a",
+				"dweb:/ipfs/QmaXE9SdrtzrgRtnzqXYHAcXSuX75MUkzXfhTirQMEwfcy"
 			]
 		},
 		"contracts/vesting.sol": {
-			"keccak256": "0x1f8ab62d9383c74b0e911e85bbcd1617d7de31d90afe50d9862ee43f1a0f9d57",
+			"keccak256": "0x5c9bb0c99f2070d9ec468a069e27206fa72cfea8fc983e547f86c4fcfef5c635",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://18f9fdcf37261eed57ba79fd9cf97d03bf3abdcefbed88504042633fbe9b641c",
-				"dweb:/ipfs/QmTKJ9DqCbDybyJpp4nQFUnszpiFBnLGMyxjFrEiJLgsmF"
+				"bzz-raw://94ea7ec9ec03131db21d638992e93aa288e929de39ef21a32e8b8831c143e73c",
+				"dweb:/ipfs/QmeQLaXLtqARuZ4yqkxVj4UNAQaG9T9ptU5CMWvwzK1rcs"
 			]
 		}
 	},

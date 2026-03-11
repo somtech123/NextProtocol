@@ -13,14 +13,23 @@ contract VestingToken{
     uint256 public immutable i_duration;   // Total vesting duration in seconds
     uint256 public immutable i_cliff;      // cliff duration in second
     
-    uint256 public totalAllocation;      // Total promised token
+    uint256 public percentShareAssign;      // Total promised token 
 
-    mapping(address => uint256) public allocation;
-    mapping(address => uint256) public claimed;
+    struct Beneficiary {
+        uint256 percentShare;   // % of vesting pool
+        uint256 allocation;
+        Role role;     // role Investor or Team
+        uint256 claimed; // Token already claimed
+        bool exists;     // check if beneficiary exists
+    }
+
+    enum Role {None, Team, Investors, Advisors}
+
+    mapping (address => Beneficiary) public beneficiaries;
+    address[] public allBeneficiaries;
 
     modifier onlyOwner(){
-        require(msg.sender == i_owner, 'Not Owner');
-        
+        require(msg.sender == i_owner, 'Not Owner');   
         _;
     }
 
@@ -28,7 +37,7 @@ contract VestingToken{
         
         if(_duration == 0) revert DurationMustBeGreaterThanZero();
 
-        if(_unit < 1 || _unit < 4)  revert InvalidTimeUnit();
+        if( _unit < 1 || _unit > 4)  revert InvalidTimeUnit();
         
         if(_cliff > _duration) revert CliffMustExceedDuration();
    
@@ -48,84 +57,114 @@ contract VestingToken{
         
     }
 
-    // function addBeneficiary(address recipient, uint256 amount) public onlyOwner{
-    //     uint256 amountInWei = amount * 1e18;
-    //     if(totalAllocation + amountInWei > IERC20(token).balanceOf(address(this))) revert NotEnoughContractToken();
-    //     allocation[recipient] = amountInWei; // ← store in wei ✅
-    //     totalAllocation      += amountInWei;
-    // }
 
-//     function vestedAmount(address beneficiary) internal view returns (uint256){
-//         /* Check if vesting has started
-//            if currentTime is before startTime return 0
-           
-//         */
-//         if(block.timestamp < startTime + cliff){
-//             return 0;
-//         }
-//         uint256 total = allocation[beneficiary];
-//         uint256 elapsed = block.timestamp - startTime;
+    // add Beneficiary to the vesting pool 
 
-//         /* Check if vesting has finished
-//            all token allocation are vested
-           
-//         */
-//         if(elapsed >= duration){
-//             return total;
-//         }
+    function addBeneficiary(address _addr, uint256 _percentShare, Role _role) public onlyOwner{
+        if(_percentShare == 0) revert ShareMustExceedZero();
 
-//         /* Check if vesting is still ongoing
-//            it calculate the portion based on the time
-//         */
+        if(_role == Role.None) revert InvalidRole();
+ 
+        if(_addr == address(0))         revert ZeroAddressError();
+        
+        if(beneficiaries[_addr].exists) revert BeneficiaryAlreadyExist();
 
-//         return (total * elapsed) / duration;
-//     }
+        uint256 newTotalShare = percentShareAssign + _percentShare;
+        if(newTotalShare > 100 ) revert TotalShareExceeded();
 
+        uint256 contractBalance = IERC20(i_token).balanceOf(address(this));
+        uint256 _allocation = (contractBalance * _percentShare) / 100;
 
-//     function claim() public {
+        beneficiaries[_addr] = Beneficiary({
+            percentShare: _percentShare,
+            allocation: _allocation,
+            role: _role,
+            claimed: 0,
+            exists: true  
+        });
 
-//         uint256 vested = vestedAmount(msg.sender);
+        percentShareAssign = newTotalShare;
 
-//         // prevent someone from claiming more
-//         uint256  claimable = vested - claimed[msg.sender];
+        allBeneficiaries.push(_addr);
+    }
 
-//         require(claimable > 0, "Nothing to claim");
+    function getBeneficiary(address _addr) public view returns ( uint256, Role, uint256){
+        Beneficiary storage beneficiary = beneficiaries[_addr];
+        return (beneficiary.allocation, beneficiary.role, beneficiary.claimed);
 
-//         //ensure the contract has enough token to claim
-//         uint256 contractBalance = IERC20(token).balanceOf(address(this));
-//         if(claimable > contractBalance){
-//             claimable = contractBalance;
-//         }
+    }
 
-//         claimed[msg.sender] += claimable;
+    function getBeneficiaryTotalAllocation(address _addr) public view returns (uint256){
+        if(!beneficiaries[_addr].exists) revert BeneficiaryNotFound();
 
-//         token.transfer(msg.sender, claimable);
+        uint256 percentShare   = beneficiaries[_addr].percentShare;
+        uint256 contractBalance = IERC20(i_token).balanceOf(address(this));
 
-//     }
+        return (contractBalance * percentShare) / 100;
+        
+    }
 
-//     function diagnose(address user) public view returns (
-//     uint256 currentTime,
-//     uint256 cliffEndsAt,
-//     uint256 cliffRemaining,
-//     uint256 userAllocation,
-//     uint256 vestedNow,
-//     uint256 alreadyClaimed,
-//     uint256 claimableNow, uint256 balance
-// ) {
-//     currentTime    = block.timestamp;
-//     balance = IERC20(token).balanceOf(address(this));
-//     cliffEndsAt    = startTime + cliff;
-//     cliffRemaining = block.timestamp < startTime + cliff 
-//                      ? (startTime + cliff) - block.timestamp 
-//                      : 0;
-//     userAllocation = allocation[user];
-//     vestedNow      = vestedAmount(user);
-//     alreadyClaimed = claimed[user];
-//     claimableNow   = vestedNow > alreadyClaimed 
-//                      ? vestedNow - alreadyClaimed 
-//                      : 0;
-// }
+    function getTotalVestedPercent() public view returns(uint256){
+        return percentShareAssign;
+    }
+
+    /* Get the amount that is available to be claimed by that user 
+       check if vesting has started and return o
+       if vesting is still ongoing return amount based on the time elapsed
+       totalAllocation * elapsedTime / duration
+       if vesting has ended return full token
+
+    */
+    function getVestedAmount(address _addr) internal  view returns (uint256){
+
+        uint256 cliffEnd = i_startTime + i_cliff;
+
+        //  before cliff — nothing vested
+        if(block.timestamp < cliffEnd){
+            return 0;
+        }
+
+        //  vesting period = duration - cliff
+        // time available for vesting after cliff passes
+
+        uint256 vestingPeriod = i_duration - i_cliff;
+
+        uint256 elapsed = block.timestamp - cliffEnd;
+        uint256 total = beneficiaries[_addr].allocation;
+
+        //  fully vested — return total
+
+        if(elapsed >= vestingPeriod){
+            return total;
+        }
+
+        // partially vested — proportional amount
+       // multiply before divide — preserve precision
+
+        return (total * elapsed) / vestingPeriod;
+
+    }
+
+    function claim() public  {
+        Beneficiary storage beneficiary = beneficiaries[msg.sender];
+
+        if(!beneficiary.exists) revert BeneficiaryNotFound();
+        if(beneficiary.allocation == 0) revert BeneficiaryNotFound();
+      
+        uint256 vested = getVestedAmount(msg.sender);
+        uint256 alreadyClaimed = beneficiary.claimed;
+
+        // nothing new to claim
+
+        if(vested <= alreadyClaimed) revert NoTokensToClaim();
+
+        //prevent over spending my claiming more token
+        //only claim newly vested tokens
+
+        uint256 claimable = vested - alreadyClaimed;
+        beneficiary.claimed += claimable;
+        
+        i_token.transfer(msg.sender, claimable);
+    }
 
 }
-
-//0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db
