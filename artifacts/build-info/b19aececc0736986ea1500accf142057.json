@@ -1,5 +1,5 @@
 {
-	"id": "ee1f7980d25dee9966a574b813abc57c",
+	"id": "b19aececc0736986ea1500accf142057",
 	"_format": "hh-sol-build-info-1",
 	"solcVersion": "0.8.30",
 	"solcLongVersion": "0.8.30+commit.73712a01",
@@ -7,7 +7,7 @@
 		"language": "Solidity",
 		"sources": {
 			"contracts/errors.sol": {
-				"content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.18;\r\n\r\nerror ZeroAddressError();\r\nerror NotEnoughContractToken();\r\nerror ZeroAmountError();\r\nerror VestingAlreadyAllocated();\r\n\r\nerror InvalidTimeUnit();\r\nerror CliffMustExceedDuration();\r\nerror DurationMustBeGreaterThanZero();\r\n\r\nerror ShareMustExceedZero();\r\nerror BeneficiaryAlreadyExist();\r\nerror TotalShareExceeded();\r\nerror InvalidRole();\r\nerror BeneficiaryNotFound();\r\nerror NoTokensToClaim();\r\nerror NotABeneficiary();\r\n\r\nerror NoMilestonesProvided();\r\n"
+				"content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.18;\r\n\r\nerror ZeroAddressError();\r\nerror NotEnoughContractToken();\r\nerror ZeroAmountError();\r\nerror VestingAlreadyAllocated();\r\n\r\nerror InvalidTimeUnit();\r\nerror CliffMustExceedDuration();\r\nerror DurationMustBeGreaterThanZero();\r\n\r\nerror ShareMustExceedZero();\r\nerror BeneficiaryAlreadyExist();\r\nerror TotalShareExceeded();\r\nerror InvalidRole();\r\nerror BeneficiaryNotFound();\r\nerror NoTokensToClaim();\r\nerror NotABeneficiary();\r\n\r\nerror NoMilestonesProvided();\r\nerror InvalidFreelancer();\r\nerror JobNotOpen();\r\nerror InvalidIndex();\r\nerror InvalidMileStoneStatus();\r\n"
 			}
 		},
 		"settings": {
@@ -56,11 +56,23 @@
 						"DurationMustBeGreaterThanZero": [
 							15
 						],
+						"InvalidFreelancer": [
+							33
+						],
+						"InvalidIndex": [
+							37
+						],
+						"InvalidMileStoneStatus": [
+							39
+						],
 						"InvalidRole": [
 							23
 						],
 						"InvalidTimeUnit": [
 							11
+						],
+						"JobNotOpen": [
+							35
 						],
 						"NoMilestonesProvided": [
 							31
@@ -90,7 +102,7 @@
 							7
 						]
 					},
-					"id": 32,
+					"id": 40,
 					"license": "MIT",
 					"nodeType": "SourceUnit",
 					"nodes": [
@@ -314,9 +326,65 @@
 								"src": "510:2:0"
 							},
 							"src": "484:29:0"
+						},
+						{
+							"errorSelector": "75aee326",
+							"id": 33,
+							"name": "InvalidFreelancer",
+							"nameLocation": "521:17:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 32,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "538:2:0"
+							},
+							"src": "515:26:0"
+						},
+						{
+							"errorSelector": "d76ebd0f",
+							"id": 35,
+							"name": "JobNotOpen",
+							"nameLocation": "549:10:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 34,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "559:2:0"
+							},
+							"src": "543:19:0"
+						},
+						{
+							"errorSelector": "63df8171",
+							"id": 37,
+							"name": "InvalidIndex",
+							"nameLocation": "570:12:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 36,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "582:2:0"
+							},
+							"src": "564:21:0"
+						},
+						{
+							"errorSelector": "50da79dd",
+							"id": 39,
+							"name": "InvalidMileStoneStatus",
+							"nameLocation": "593:22:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 38,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "615:2:0"
+							},
+							"src": "587:31:0"
 						}
 					],
-					"src": "33:482:0"
+					"src": "33:587:0"
 				},
 				"id": 0
 			}

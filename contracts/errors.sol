@@ -19,3 +19,7 @@ error NoTokensToClaim();
 error NotABeneficiary();
 
 error NoMilestonesProvided();
+error InvalidFreelancer();
+error JobNotOpen();
+error InvalidIndex();
+error InvalidMileStoneStatus();

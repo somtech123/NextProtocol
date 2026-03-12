@@ -4,7 +4,104 @@
 	},
 	"language": "Solidity",
 	"output": {
-		"abi": [],
+		"abi": [
+			{
+				"inputs": [],
+				"name": "cann",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "invalidlength",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "_amount",
+						"type": "uint256[]"
+					}
+				],
+				"name": "add",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_jobid",
+						"type": "uint256"
+					}
+				],
+				"name": "getjob",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "amount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "bool",
+								"name": "paid",
+								"type": "bool"
+							},
+							{
+								"internalType": "enum Demo.MileStatus",
+								"name": "milesta",
+								"type": "uint8"
+							}
+						],
+						"internalType": "struct Demo.MileStone[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "jobs",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "mileId",
+						"type": "uint256"
+					}
+				],
+				"name": "submitMilestone",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
 		"devdoc": {
 			"kind": "dev",
 			"methods": {},
@@ -33,11 +130,11 @@
 	},
 	"sources": {
 		"contracts/demo.sol": {
-			"keccak256": "0x8d019e20b5cedcf5bd1e0fa28188b453d247d8fa286c732b61dc8c8e7b021eeb",
+			"keccak256": "0xd0920468af8c4b4e75892de15aec0634c4b3c03a42c59c35f696c9e8b8263896",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://699236fbcc7ea46756b3194349e42cfbe4c6a762cad3c29eee1ee09f3fb94db0",
-				"dweb:/ipfs/QmXz2hmepd3qSCp4opLoaGUHAuqsL7wUd7HXuf5PAyQ1Tq"
+				"bzz-raw://9bfd6d8f7b87f75476a9c568361e599295445fcbf0d16b84a243ba480059fa77",
+				"dweb:/ipfs/QmPmARLfervJxXSGTftUtghJtBePWhm2cKcagPs1rdTL4h"
 			]
 		}
 	},

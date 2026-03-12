@@ -18,13 +18,110 @@
 			},
 			{
 				"inputs": [],
+				"name": "InvalidFreelancer",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "InvalidIndex",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "InvalidMileStoneStatus",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "JobNotOpen",
+				"type": "error"
+			},
+			{
+				"inputs": [],
 				"name": "NoMilestonesProvided",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"name": "OwnableInvalidOwner",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "OwnableUnauthorizedAccount",
 				"type": "error"
 			},
 			{
 				"inputs": [],
 				"name": "ZeroAddressError",
 				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_freelancer",
+						"type": "address"
+					}
+				],
+				"name": "acceptJob",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_jobId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_milestoneId",
+						"type": "uint256"
+					}
+				],
+				"name": "approveJob",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			},
 			{
 				"inputs": [
@@ -82,50 +179,23 @@
 						"components": [
 							{
 								"internalType": "uint256",
-								"name": "id",
+								"name": "amount",
 								"type": "uint256"
 							},
 							{
-								"internalType": "address",
-								"name": "clients",
-								"type": "address"
+								"internalType": "bool",
+								"name": "paid",
+								"type": "bool"
 							},
 							{
-								"internalType": "address",
-								"name": "freelancer",
-								"type": "address"
-							},
-							{
-								"components": [
-									{
-										"internalType": "uint256",
-										"name": "amount",
-										"type": "uint256"
-									},
-									{
-										"internalType": "bool",
-										"name": "completed",
-										"type": "bool"
-									},
-									{
-										"internalType": "bool",
-										"name": "paid",
-										"type": "bool"
-									}
-								],
-								"internalType": "struct Escrow.MileStone[]",
-								"name": "milestones",
-								"type": "tuple[]"
-							},
-							{
-								"internalType": "uint256",
-								"name": "totalAmount",
-								"type": "uint256"
+								"internalType": "enum Escrow.MileStoneStatus",
+								"name": "mileStoneStatus",
+								"type": "uint8"
 							}
 						],
-						"internalType": "struct Escrow.Job",
+						"internalType": "struct Escrow.MileStone[]",
 						"name": "",
-						"type": "tuple"
+						"type": "tuple[]"
 					}
 				],
 				"stateMutability": "view",
@@ -186,15 +256,98 @@
 						"internalType": "uint256",
 						"name": "totalAmount",
 						"type": "uint256"
+					},
+					{
+						"internalType": "enum Escrow.Status",
+						"name": "status",
+						"type": "uint8"
 					}
 				],
 				"stateMutability": "view",
 				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_jobId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_milestoneId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_freelancer",
+						"type": "address"
+					}
+				],
+				"name": "submitMilestone",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
+			"errors": {
+				"OwnableInvalidOwner(address)": [
+					{
+						"details": "The owner is not a valid owner account. (eg. `address(0)`)"
+					}
+				],
+				"OwnableUnauthorizedAccount(address)": [
+					{
+						"details": "The caller account is not authorized to perform an operation."
+					}
+				]
+			},
 			"kind": "dev",
-			"methods": {},
+			"methods": {
+				"owner()": {
+					"details": "Returns the address of the current owner."
+				},
+				"renounceOwnership()": {
+					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner."
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+				}
+			},
 			"version": 1
 		},
 		"userdoc": {
@@ -219,6 +372,14 @@
 		"remappings": []
 	},
 	"sources": {
+		"@openzeppelin/contracts/access/Ownable.sol": {
+			"keccak256": "0xff6d0bb2e285473e5311d9d3caacb525ae3538a80758c10649a4d61029b017bb",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8ed324d3920bb545059d66ab97d43e43ee85fd3bd52e03e401f020afb0b120f6",
+				"dweb:/ipfs/QmfEckWLmZkDDcoWrkEvMWhms66xwTLff9DDhegYpvHo1a"
+			]
+		},
 		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
 			"keccak256": "0x74ed01eb66b923d0d0cfe3be84604ac04b76482a55f9dd655e1ef4d367f95bc2",
 			"license": "MIT",
@@ -227,20 +388,28 @@
 				"dweb:/ipfs/QmeCfPykghhMc81VJTrHTC7sF6CRvaA1FXVq2pJhwYp1dV"
 			]
 		},
-		"contracts/errors.sol": {
-			"keccak256": "0x6c41b0d9f21df67583e5bfea4bbe3c79a0cfc7bb5d1564aef0af32ac423da881",
+		"@openzeppelin/contracts/utils/Context.sol": {
+			"keccak256": "0x493033a8d1b176a037b2cc6a04dad01a5c157722049bbecf632ca876224dd4b2",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://15fd716262a5c0a782a81a7b4ab495d13d437d9dbbc0276a18e557af57bfb991",
-				"dweb:/ipfs/QmQJcFQoLUdHejF28ZxFdv12pTb3QvnHAXDbbXn46NMZzT"
+				"bzz-raw://6a708e8a5bdb1011c2c381c9a5cfd8a9a956d7d0a9dc1bd8bcdaf52f76ef2f12",
+				"dweb:/ipfs/Qmax9WHBnVsZP46ZxEMNRQpLQnrdE4dK8LehML1Py8FowF"
+			]
+		},
+		"contracts/errors.sol": {
+			"keccak256": "0x8539ed60db6db94f368156c258c09d7468df42d0099126b48f1681f9c896df3c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://275749ce18fd544e1c70191179ea10590b745aad95310809c826ab1913dfaef1",
+				"dweb:/ipfs/QmTJsu6Yq2wAr63gueyfVRjwBkEFbCYg245fXCsumHCzLk"
 			]
 		},
 		"contracts/escrow.sol": {
-			"keccak256": "0xc5a28e8dd36ae5a0a503a84eac15a0f8f81878b581f8d658215d3e76efb6a2d2",
+			"keccak256": "0xd2778bde4294a01375863145f54e3d439efca06c79ab18fe92dcc7f3e6806037",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://9fed3abe226891336df609a8d41a1b08b3c1f7775e23e398b460c4e3a5b9ec2d",
-				"dweb:/ipfs/QmdMeXNo9YGmur2n6fj5q3KjU6EC4PpCNxFwpLPCsr3LQ9"
+				"bzz-raw://f94a25d045105d47ed7d2c26a1e9b5a3119d23240005fce9855faa09fa1f8ac1",
+				"dweb:/ipfs/QmS8gLxwWqKjJDp7firHgzrhWmSSMr4TisJps8vA5aUz4y"
 			]
 		},
 		"contracts/helper.sol": {
