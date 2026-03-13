@@ -1,5 +1,5 @@
 {
-	"id": "b19aececc0736986ea1500accf142057",
+	"id": "87d8cb937a256cbf4165bf8b1a115def",
 	"_format": "hh-sol-build-info-1",
 	"solcVersion": "0.8.30",
 	"solcLongVersion": "0.8.30+commit.73712a01",
@@ -7,7 +7,7 @@
 		"language": "Solidity",
 		"sources": {
 			"contracts/errors.sol": {
-				"content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.18;\r\n\r\nerror ZeroAddressError();\r\nerror NotEnoughContractToken();\r\nerror ZeroAmountError();\r\nerror VestingAlreadyAllocated();\r\n\r\nerror InvalidTimeUnit();\r\nerror CliffMustExceedDuration();\r\nerror DurationMustBeGreaterThanZero();\r\n\r\nerror ShareMustExceedZero();\r\nerror BeneficiaryAlreadyExist();\r\nerror TotalShareExceeded();\r\nerror InvalidRole();\r\nerror BeneficiaryNotFound();\r\nerror NoTokensToClaim();\r\nerror NotABeneficiary();\r\n\r\nerror NoMilestonesProvided();\r\nerror InvalidFreelancer();\r\nerror JobNotOpen();\r\nerror InvalidIndex();\r\nerror InvalidMileStoneStatus();\r\n"
+				"content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.18;\r\n\r\nerror ZeroAddressError();\r\nerror NotEnoughContractToken();\r\nerror ZeroAmountError();\r\nerror VestingAlreadyAllocated();\r\n\r\nerror InvalidTimeUnit();\r\nerror CliffMustExceedDuration();\r\nerror DurationMustBeGreaterThanZero();\r\n\r\nerror ShareMustExceedZero();\r\nerror BeneficiaryAlreadyExist();\r\nerror TotalShareExceeded();\r\nerror InvalidRole();\r\nerror BeneficiaryNotFound();\r\nerror NoTokensToClaim();\r\nerror NotABeneficiary();\r\n\r\nerror NoMilestonesProvided();\r\nerror InvalidFreelancer();\r\nerror JobNotOpen();\r\nerror InvalidIndex();\r\nerror InvalidMileStoneStatus();\r\n\r\nerror MileStoneSubmitted();\r\nerror NotParticipant();\r\n"
 			}
 		},
 		"settings": {
@@ -74,6 +74,9 @@
 						"JobNotOpen": [
 							35
 						],
+						"MileStoneSubmitted": [
+							41
+						],
 						"NoMilestonesProvided": [
 							31
 						],
@@ -85,6 +88,9 @@
 						],
 						"NotEnoughContractToken": [
 							5
+						],
+						"NotParticipant": [
+							43
 						],
 						"ShareMustExceedZero": [
 							17
@@ -102,7 +108,7 @@
 							7
 						]
 					},
-					"id": 40,
+					"id": 44,
 					"license": "MIT",
 					"nodeType": "SourceUnit",
 					"nodes": [
@@ -382,9 +388,37 @@
 								"src": "615:2:0"
 							},
 							"src": "587:31:0"
+						},
+						{
+							"errorSelector": "ca83518b",
+							"id": 41,
+							"name": "MileStoneSubmitted",
+							"nameLocation": "628:18:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 40,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "646:2:0"
+							},
+							"src": "622:27:0"
+						},
+						{
+							"errorSelector": "e438f8ce",
+							"id": 43,
+							"name": "NotParticipant",
+							"nameLocation": "657:14:0",
+							"nodeType": "ErrorDefinition",
+							"parameters": {
+								"id": 42,
+								"nodeType": "ParameterList",
+								"parameters": [],
+								"src": "671:2:0"
+							},
+							"src": "651:23:0"
 						}
 					],
-					"src": "33:587:0"
+					"src": "33:643:0"
 				},
 				"id": 0
 			}

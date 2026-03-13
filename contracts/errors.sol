@@ -23,3 +23,7 @@ error InvalidFreelancer();
 error JobNotOpen();
 error InvalidIndex();
 error InvalidMileStoneStatus();
+
+error MileStoneNotInReview();
+error NotParticipant();
+error MileStoneNotDisputed();
