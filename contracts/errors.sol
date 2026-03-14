@@ -27,3 +27,4 @@ error InvalidMileStoneStatus();
 error MileStoneNotInReview();
 error NotParticipant();
 error MileStoneNotDisputed();
+error NotFreelancer();

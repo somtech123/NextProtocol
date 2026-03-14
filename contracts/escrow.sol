@@ -59,6 +59,11 @@ contract Escrow is Ownable, AccessControl{
 
     }
 
+    modifier onlyFreelancer(uint256 id){
+        if(msg.sender != jobs[id].freelancer) revert NotFreelancer();
+        _;
+    }
+
     function getjob(uint256 _jobid) public view returns (MileStone [] memory){
         return  jobs[_jobid].milestones;
     }
@@ -103,7 +108,7 @@ contract Escrow is Ownable, AccessControl{
     }
 
 
-    function acceptJob(uint256 id, address _freelancer ) external {
+    function acceptJob(uint256 id, address _freelancer ) external onlyFreelancer(id) {
         Job storage _job = jobs[id];
 
         if(_freelancer == address(0)) revert ZeroAddressError();
@@ -113,7 +118,7 @@ contract Escrow is Ownable, AccessControl{
         _job.status = Status.Accepted;
     }
 
-    function submitMilestone(uint256 _jobId, uint256 _milestoneId, address _freelancer) external {
+    function submitMilestone(uint256 _jobId, uint256 _milestoneId, address _freelancer) external onlyFreelancer(_jobId) {
         Job storage _job = jobs[_jobId];
 
         if(_freelancer == address(0)) revert ZeroAddressError();

@@ -79,6 +79,11 @@
 			},
 			{
 				"inputs": [],
+				"name": "NotFreelancer",
+				"type": "error"
+			},
+			{
+				"inputs": [],
 				"name": "NotParticipant",
 				"type": "error"
 			},
@@ -813,19 +818,19 @@
 			]
 		},
 		"contracts/errors.sol": {
-			"keccak256": "0x0eee2e0e9ea60d03ff8eb01c3857c26df25b5da6ef50a230fbedce5d5aaa4069",
+			"keccak256": "0x100eca1712eda614f797e02300d65f821e6e16b18db5ca51e88279b5ac80a61a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://02075979a952636ddd3e25c794df5b640746745d67d8aef33fbf6f6fb3abdb62",
-				"dweb:/ipfs/QmQNkeHbpqnofmEV9kYckXdgsvGuDJgepZUhANGMJ5WgcW"
+				"bzz-raw://b50bc8b2d717237f2a0e6d0570efa395620941492c62b214e3ceeb85b70816ce",
+				"dweb:/ipfs/QmP1xe8cTZG93pFr8EhnCVwpVNmM66qkxyUTo6TW6EWHz4"
 			]
 		},
 		"contracts/escrow.sol": {
-			"keccak256": "0x4659cfd9efea0f632c51bfca504f28887727f89717a3f8604c6f9fe6bd01e470",
+			"keccak256": "0xe425c5129edf91ba7c385a31021baaf7dc508f6578a9dd67894da7140bb25074",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://227b18e1985c57fb824ca868a15b19950c16a3b87e66cbaa0a5a589eadf3c4c1",
-				"dweb:/ipfs/QmQQN7LPGn9qDwEhScLkRJeXqaVU1BmpHDYmDTwzd51FxG"
+				"bzz-raw://e487408977fe42f94e1f520370a0ce9f886835b01a710abf4031a93ff90086ef",
+				"dweb:/ipfs/QmTGZGoqmgLAuLTDTWHCWn3igcmr2Lpm2HWwtGCFk5hAJf"
 			]
 		},
 		"contracts/helper.sol": {
