@@ -96,9 +96,9 @@ contract NexToken is ERC20, AccessControl, ERC20Pausable{
         }
 
         // PATH 2 & 3 — mint or burn path, no fee
-        if(to == address(0) || from == address(this)){
-            super._update(from, to, value);
-        }
+       
+        if(from == address(0)) { super._update(from, to, value); return; } // mint ✅
+        if(to == address(0))   { super._update(from, to, value); return; } // burn ✅
 
         // PATH 4 — regular transfer, apply 20% burn
         uint256  burnt_value;
