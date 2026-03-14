@@ -486,19 +486,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "getVestingAmount",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "bytes32",
@@ -742,6 +729,8 @@
 			}
 		],
 		"devdoc": {
+			"author": "Oscar Onyenacho",
+			"details": "Inherits ERC20, AccessControl, and ERC20Pausable from OpenZeppelin.         All tokens are minted to the contract on deployment.         Uses three custom roles: DISTRIBUTOR_ROLE, PAUSER_ROLE, BURNER_ROLE.",
 			"errors": {
 				"AccessControlBadConfirmation()": [
 					{
@@ -841,6 +830,19 @@
 			},
 			"kind": "dev",
 			"methods": {
+				"airdrop(address[],uint256)": {
+					"details": "Only callable by DISTRIBUTOR_ROLE         Skips zero addresses silently rather than reverting         Checks total balance before loop to fail fast         Uses unchecked ++i for gas efficiency",
+					"params": {
+						"recipients": "Array of recipient addresses (calldata for gas savings)",
+						"value": "Amount per recipient in whole tokens (e.g. 10 = 10 NXT)"
+					}
+				},
+				"allocateVesting(address)": {
+					"details": "Can only be called ONCE — vestingAllocated flag prevents repeat         Flag is set BEFORE transfer to prevent reentrancy         Only callable by DISTRIBUTOR_ROLE",
+					"params": {
+						"to": "Address of the vesting contract — cannot be zero address"
+					}
+				},
 				"allowance(address,address)": {
 					"details": "Returns the remaining number of tokens that `spender` will be allowed to spend on behalf of `owner` through {transferFrom}. This is zero by default. This value changes when {approve} or {transferFrom} are called."
 				},
@@ -850,8 +852,30 @@
 				"balanceOf(address)": {
 					"details": "Returns the value of tokens owned by `account`."
 				},
+				"constructor": {
+					"details": "Grants all roles to deployer (msg.sender).         Tokens are held by contract and distributed via distribute()         All roles can be transferred or revoked by DEFAULT_ADMIN_ROLE"
+				},
+				"contractBalance()": {
+					"details": "Decreases as tokens are distributed, airdropped or burned",
+					"returns": {
+						"_0": "Contract token balance in wei"
+					}
+				},
 				"decimals()": {
 					"details": "Returns the number of decimals used to get its user representation. For example, if `decimals` equals `2`, a balance of `505` tokens should be displayed to a user as `5.05` (`505 / 10 ** 2`). Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei. This is the default value returned by this function, unless it's overridden. NOTE: This information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including {IERC20-balanceOf} and {IERC20-transfer}."
+				},
+				"distribute(address,uint256)": {
+					"details": "Only callable by DISTRIBUTOR_ROLE         Value is passed as whole tokens and converted to wei internally         Uses _transfer() not transferFrom() as contract owns the tokens",
+					"params": {
+						"to": "Recipient address — cannot be zero address",
+						"value": "Amount in whole tokens (e.g. 100 = 100 NXT)"
+					}
+				},
+				"emergencyBurn(uint256)": {
+					"details": "Only callable by BURNER_ROLE and only when contract is paused         Contract must be paused first via pause()         Burns from contract balance only — not from user wallets         Value converted from whole tokens to wei internally",
+					"params": {
+						"value": "Amount to burn in whole tokens (e.g. 100 = 100 NXT)"
+					}
 				},
 				"getRoleAdmin(bytes32)": {
 					"details": "Returns the admin role that controls `role`. See {grantRole} and {revokeRole}. To change a role's admin, use {_setRoleAdmin}."
@@ -862,8 +886,23 @@
 				"hasRole(bytes32,address)": {
 					"details": "Returns `true` if `account` has been granted `role`."
 				},
+				"isVestingAllocated()": {
+					"details": "Once true — can never be reset to false",
+					"returns": {
+						"_0": "true if vesting has been allocated, false otherwise"
+					}
+				},
+				"maxSupply()": {
+					"details": "Reads from immutable — costs ~3 gas (bytecode not storage)",
+					"returns": {
+						"_0": "Maximum supply in wei (21,000,000 * 1e18)"
+					}
+				},
 				"name()": {
 					"details": "Returns the name of the token."
+				},
+				"pause()": {
+					"details": "Only callable by accounts with PAUSER_ROLE         While paused only emergencyBurn() is executable"
 				},
 				"paused()": {
 					"details": "Returns true if the contract is paused, and false otherwise."
@@ -888,13 +927,69 @@
 				},
 				"transferFrom(address,address,uint256)": {
 					"details": "See {IERC20-transferFrom}. Skips emitting an {Approval} event indicating an allowance update. This is not required by the ERC. See {xref-ERC20-_approve-address-address-uint256-bool-}[_approve]. NOTE: Does not update the allowance if the current allowance is the maximum `uint256`. Requirements: - `from` and `to` cannot be the zero address. - `from` must have a balance of at least `value`. - the caller must have allowance for ``from``'s tokens of at least `value`."
+				},
+				"unPause()": {
+					"details": "Only callable by accounts with PAUSER_ROLE"
 				}
 			},
+			"stateVariables": {
+				"BURNER_ROLE": {
+					"details": "Can only burn when contract is paused via emergencyBurn()"
+				},
+				"BURN_DENOMINATOR": {
+					"details": "Denominator for burn rate calculation  "
+				},
+				"BURN_RATE": {
+					"details": "for burn rate calculation (200/1000 = 20%)"
+				},
+				"DISTRIBUTOR_ROLE": {
+					"details": "Computed at compile time via keccak256 and stored in bytecode"
+				},
+				"i_max_supply": {
+					"details": "Set once in constructor and stored as immutable in bytecode"
+				},
+				"vestingAllocated": {
+					"details": "Once set to true cannot be reset — vesting can only happen once"
+				}
+			},
+			"title": "NexToken — ERC20 Payment & Incentive Token",
 			"version": 1
 		},
 		"userdoc": {
 			"kind": "user",
-			"methods": {},
+			"methods": {
+				"airdrop(address[],uint256)": {
+					"notice": "Sends equal token amounts to multiple recipients in one call"
+				},
+				"allocateVesting(address)": {
+					"notice": "Allocates 20% of total supply to the vesting contract"
+				},
+				"constructor": {
+					"notice": "Deploys NexToken and mints full supply to the contract itself"
+				},
+				"contractBalance()": {
+					"notice": "Returns the current token balance held by this contract"
+				},
+				"distribute(address,uint256)": {
+					"notice": "Transfers tokens from contract balance to a recipient"
+				},
+				"emergencyBurn(uint256)": {
+					"notice": "Burns tokens from contract balance during emergency"
+				},
+				"isVestingAllocated()": {
+					"notice": "Returns whether vesting tokens have been allocated"
+				},
+				"maxSupply()": {
+					"notice": "Returns the maximum token supply"
+				},
+				"pause()": {
+					"notice": "Pauses all token transfers"
+				},
+				"unPause()": {
+					"notice": "Unpauses token transfers — resumes normal operation"
+				}
+			},
+			"notice": "NexToken (NXT) is a deflationary ERC20 token with a 20% burn rate         on every transfer. It supports role-based access control for         distribution, pausing, and emergency burns.",
 			"version": 1
 		}
 	},
@@ -1011,11 +1106,11 @@
 			]
 		},
 		"contracts/token.sol": {
-			"keccak256": "0x8f1370193cbe66c4644e2fcb695b7c3f2ba9f18a692d8a47afe1a349af787a05",
+			"keccak256": "0x1648382b90ba4c3b5ed6c576118bacc02a18f556a7dcfb98044fe4ef07122a53",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://461b3bd879072aa181e91d09bbe3f7c03bdc20ba52932e3b37a3c34f20ed91a6",
-				"dweb:/ipfs/QmVCtKBCK6hmAZ95nYSF8iyiqfFjBghQB9rMjhhDtsUFir"
+				"bzz-raw://71e8b656b55b7d8a4ee3549c3a3d095cec4d834529db2a1a50a2ed153342cadc",
+				"dweb:/ipfs/QmTWEXUibu5EkkfqW678UFYxsrDm9xarPkB9YbumTsCAwj"
 			]
 		}
 	},
